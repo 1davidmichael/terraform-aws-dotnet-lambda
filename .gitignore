@@ -50,4 +50,5 @@ n# Created by https://www.toptal.com/developers/gitignore/api/terragrunt
 terragrunt-debug.tfvars.json
 
 # End of https://www.toptal.com/developers/gitignore/api/terragrunt
-n
+
+build/

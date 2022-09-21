@@ -3,18 +3,16 @@ terraform {
 }
 
 locals {
-  output_zip_file = "$TMP"
+  output_zip_file = "${path.module}/build/output.zip"
 }
 
-resource "null_resource" "bundle" {
-  provisioner "local-exec" {
-    command     = "dotnet lambda package -c Release -o $TMP/${var.code_location}.zip"
-    working_dir = var.code_location
+data "external" "create_bundle" {
+  #program = ["dotnet lambda package -o /tmp/app.zip && jq --null-input --arg location \"/tmp/app.zip\" --arg hash \"$(md5sum /tmp/app.zip | awk '{ print $1 }')\" '{\"location\": $location, \"hash\": $hash}']"]
+  program = ["${path.module}/package.sh"]
+  query = {
+    output_dir    = local.output_zip_file
+    code_location = var.code_location
   }
-}
-
-data "local_file" "lambda_zip" {
-  filename = "value"
 }
 
 resource "aws_lambda_function" "this" {
@@ -24,6 +22,7 @@ resource "aws_lambda_function" "this" {
   handler       = var.handler
   description   = var.description
   memory_size   = var.memory_size
+  filename      = data.external.create_bundle.result["location"]
 }
 
 resource "aws_cloudwatch_log_group" "example" {
@@ -50,6 +49,6 @@ resource "aws_iam_role" "this" {
 
 resource "aws_iam_role_policy_attachment" "lambda_logs" {
   count      = var.create_role ? 1 : 0
-  role       = aws_iam_role.this[0].arn
+  role       = aws_iam_role.this[0].name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
 }

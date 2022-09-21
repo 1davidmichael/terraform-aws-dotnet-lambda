@@ -12,7 +12,7 @@ variable "role_arn" {
 variable "create_role" {
   type        = bool
   description = "Whether to create a role for the Lambda function."
-  default     = false
+  default     = true
 }
 
 variable "log_retention" {

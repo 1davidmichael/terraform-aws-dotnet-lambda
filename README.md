@@ -14,8 +14,7 @@ _Terraform module to create a dotnet lambda function locally_
 | Name | Version |
 |------|---------|
 | <a name="provider_aws"></a> [aws](#provider\_aws) | 4.31.0 |
-| <a name="provider_local"></a> [local](#provider\_local) | 2.2.3 |
-| <a name="provider_null"></a> [null](#provider\_null) | 3.1.1 |
+| <a name="provider_external"></a> [external](#provider\_external) | 2.2.2 |
 
 ## Modules
 
@@ -29,15 +28,14 @@ No modules.
 | [aws_iam_role.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
 | [aws_iam_role_policy_attachment.lambda_logs](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_lambda_function.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_function) | resource |
-| [null_resource.bundle](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
-| [local_file.lambda_zip](https://registry.terraform.io/providers/hashicorp/local/latest/docs/data-sources/file) | data source |
+| [external_external.create_bundle](https://registry.terraform.io/providers/hashicorp/external/latest/docs/data-sources/external) | data source |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_code_location"></a> [code\_location](#input\_code\_location) | The location of the dotnet code for the lambda function | `string` | `"src/"` | no |
-| <a name="input_create_role"></a> [create\_role](#input\_create\_role) | Whether to create a role for the Lambda function. | `bool` | `false` | no |
+| <a name="input_create_role"></a> [create\_role](#input\_create\_role) | Whether to create a role for the Lambda function. | `bool` | `true` | no |
 | <a name="input_description"></a> [description](#input\_description) | Description of what your Lambda Function does | `string` | `""` | no |
 | <a name="input_dotnet_runtime"></a> [dotnet\_runtime](#input\_dotnet\_runtime) | Dotnet runtime version for lambda to use | `string` | `"dotnet6"` | no |
 | <a name="input_function_name"></a> [function\_name](#input\_function\_name) | The name of the function. | `string` | n/a | yes |
@@ -48,5 +46,7 @@ No modules.
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_lambda_function_arn"></a> [lambda\_function\_arn](#output\_lambda\_function\_arn) | n/a |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
