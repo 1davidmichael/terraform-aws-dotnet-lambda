@@ -2,6 +2,8 @@
 
 _Terraform module to create a dotnet lambda function locally_
 
+This module utilizes the `dotnet` runtime CLI locally to package the lambda and automatically upload it to AWS.
+
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 
