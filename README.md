@@ -7,7 +7,7 @@ _Terraform module to create a dotnet lambda function locally_
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.2.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.2.0 |
 
 ## Providers
 
@@ -28,6 +28,7 @@ No modules.
 | [aws_iam_role.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
 | [aws_iam_role_policy_attachment.lambda_logs](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_lambda_function.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_function) | resource |
+| [aws_s3_bucket.code](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket) | resource |
 | [external_external.create_bundle](https://registry.terraform.io/providers/hashicorp/external/latest/docs/data-sources/external) | data source |
 
 ## Inputs
@@ -49,4 +50,5 @@ No modules.
 | Name | Description |
 |------|-------------|
 | <a name="output_lambda_function_arn"></a> [lambda\_function\_arn](#output\_lambda\_function\_arn) | n/a |
+| <a name="output_lambda_function_role_arn"></a> [lambda\_function\_role\_arn](#output\_lambda\_function\_role\_arn) | n/a |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

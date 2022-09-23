@@ -1,19 +1,34 @@
 terraform {
-  required_version = "~> 1.2.0"
+  required_version = ">= 1.2.0"
 }
 
 locals {
-  output_zip_file = "${path.module}/build/output.zip"
+  output_dir = "${path.module}/build"
 }
 
 data "external" "create_bundle" {
-  #program = ["dotnet lambda package -o /tmp/app.zip && jq --null-input --arg location \"/tmp/app.zip\" --arg hash \"$(md5sum /tmp/app.zip | awk '{ print $1 }')\" '{\"location\": $location, \"hash\": $hash}']"]
   program = ["${path.module}/package.sh"]
   query = {
-    output_dir    = local.output_zip_file
+    output_dir    = local.output_dir
     code_location = var.code_location
   }
 }
+
+resource "aws_s3_bucket" "code" {
+
+}
+
+# resource "null_resource" "archive" {
+#   triggers = {
+#     filename = data.external.create_bundle.result.location
+#     timestamp = data.external.create_bundle.result.timestamp
+#   }
+#   provisioner "local-exec" {
+#     command = [
+
+#     ]
+#   }
+# }
 
 resource "aws_lambda_function" "this" {
   function_name = var.function_name
@@ -22,7 +37,7 @@ resource "aws_lambda_function" "this" {
   handler       = var.handler
   description   = var.description
   memory_size   = var.memory_size
-  filename      = data.external.create_bundle.result["location"]
+  filename      = data.external.create_bundle.result.location
 }
 
 resource "aws_cloudwatch_log_group" "example" {

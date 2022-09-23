@@ -13,7 +13,7 @@ module "dotnet_lambda" {
   function_name  = "dotnet-lambda-${random_pet.this.id}"
   handler        = "examples::examples.Function::FunctionHandler"
   dotnet_runtime = "dotnet6"
-  code_location  = "src/examples/"
+  code_location  = "src/examples"
 }
 
 output "lambda_function_arn" {

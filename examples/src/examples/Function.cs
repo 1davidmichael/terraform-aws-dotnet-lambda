@@ -7,7 +7,7 @@ namespace examples;
 
 public class Function
 {
-    
+
     /// <summary>
     /// A simple function that takes a string and does a ToUpper
     /// </summary>
