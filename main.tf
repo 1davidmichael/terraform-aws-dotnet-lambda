@@ -6,6 +6,7 @@ locals {
   output_dir = "${path.module}/build"
 }
 
+# TODO: Add support for optional packaging
 data "external" "create_bundle" {
   program = ["${path.module}/package.sh"]
   query = {
@@ -14,21 +15,8 @@ data "external" "create_bundle" {
   }
 }
 
-resource "aws_s3_bucket" "code" {
-
-}
-
-# resource "null_resource" "archive" {
-#   triggers = {
-#     filename = data.external.create_bundle.result.location
-#     timestamp = data.external.create_bundle.result.timestamp
-#   }
-#   provisioner "local-exec" {
-#     command = [
-
-#     ]
-#   }
-# }
+# TODO: Use bucket to upload code for larger lambda sizes
+#resource "aws_s3_bucket" "code" {}
 
 resource "aws_lambda_function" "this" {
   function_name = var.function_name
