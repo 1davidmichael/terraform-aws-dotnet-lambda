@@ -1,4 +1,5 @@
 #!/bin/bash -e
+# shellcheck disable=SC2016,SC2288
 
 # List of arguments
 eval "$(jq -r '@sh "OUTPUT_DIR=\(.output_dir) CODE_LOCATION=\(.code_location)"')"
