@@ -12,19 +12,19 @@ jobs:
         run: terraform validate
       - name: Terraform Format
         run: terraform fmt -check
-  example:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: examples
-    steps:
-      - uses: actions/checkout@v2
-      - uses: hashicorp/setup-terraform@v1
-      - name: Terraform Init
-        run: terraform init
-      - name: Terraform Validate
-        run: terraform validate
-      - name: Terraform Format
-        run: terraform fmt -check
-      - name: Terraform Apply
-        run: terraform apply -auto-approve
+  # example:
+  #   runs-on: ubuntu-latest
+  #   defaults:
+  #     run:
+  #       working-directory: examples
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - uses: hashicorp/setup-terraform@v1
+  #     - name: Terraform Init
+  #       run: terraform init
+  #     - name: Terraform Validate
+  #       run: terraform validate
+  #     - name: Terraform Format
+  #       run: terraform fmt -check
+  #     - name: Terraform Apply
+  #       run: terraform apply -auto-approve
