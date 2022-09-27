@@ -17,6 +17,7 @@ This module utilizes the `dotnet` runtime CLI locally to package the lambda and 
 |------|---------|
 | <a name="provider_aws"></a> [aws](#provider\_aws) | 4.31.0 |
 | <a name="provider_external"></a> [external](#provider\_external) | 2.2.2 |
+| <a name="provider_null"></a> [null](#provider\_null) | 3.1.1 |
 
 ## Modules
 
@@ -30,7 +31,8 @@ No modules.
 | [aws_iam_role.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
 | [aws_iam_role_policy_attachment.lambda_logs](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_lambda_function.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_function) | resource |
-| [external_external.create_bundle](https://registry.terraform.io/providers/hashicorp/external/latest/docs/data-sources/external) | data source |
+| [null_resource.create_package](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
+| [external_external.build_folder](https://registry.terraform.io/providers/hashicorp/external/latest/docs/data-sources/external) | data source |
 
 ## Inputs
 

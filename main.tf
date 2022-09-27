@@ -6,17 +6,27 @@ locals {
   output_dir = "${path.module}/build"
 }
 
-# TODO: Add support for optional packaging
-data "external" "create_bundle" {
-  program = ["${path.module}/package.sh"]
+# Outputs the following:
+# location = output bundle file
+# hash = mmd5sum of the bundle file
+data "external" "build_folder" {
+  program = ["${path.module}/bin/folder_contents.sh", var.code_location]
   query = {
     output_dir    = local.output_dir
     code_location = var.code_location
   }
 }
 
-# TODO: Use bucket to upload code for larger lambda sizes
-#resource "aws_s3_bucket" "code" {}
+# Build lambda when contents of the directory have changed
+resource "null_resource" "create_package" {
+  triggers = {
+    build_folder_content_md5 = data.external.build_folder.result.location
+  }
+
+  provisioner "local-exec" {
+    command = "${path.module}/bin/package.sh ${data.external.build_folder.result.location} ${var.code_location}"
+  }
+}
 
 resource "aws_lambda_function" "this" {
   function_name = var.function_name
@@ -25,7 +35,7 @@ resource "aws_lambda_function" "this" {
   handler       = var.handler
   description   = var.description
   memory_size   = var.memory_size
-  filename      = data.external.create_bundle.result.location
+  filename      = data.external.build_folder.result.location
 }
 
 resource "aws_cloudwatch_log_group" "example" {
