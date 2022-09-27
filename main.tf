@@ -3,14 +3,14 @@ terraform {
 }
 
 locals {
-  output_dir = "${path.module}/build"
+  output_dir = abspath("${path.root}/build")
 }
 
 # Outputs the following:
 # location = output bundle file
 # hash = mmd5sum of the bundle file
 data "external" "build_folder" {
-  program = ["${path.module}/bin/folder_contents.sh", var.code_location]
+  program = ["bash", "${path.module}/bin/folder_contents.sh"]
   query = {
     output_dir    = local.output_dir
     code_location = var.code_location
@@ -20,7 +20,7 @@ data "external" "build_folder" {
 # Build lambda when contents of the directory have changed
 resource "null_resource" "create_package" {
   triggers = {
-    build_folder_content_md5 = data.external.build_folder.result.location
+    output_file_location = data.external.build_folder.result.location
   }
 
   provisioner "local-exec" {
@@ -29,6 +29,9 @@ resource "null_resource" "create_package" {
 }
 
 resource "aws_lambda_function" "this" {
+  depends_on = [
+    null_resource.create_package
+  ]
   function_name = var.function_name
   role          = var.create_role ? aws_iam_role.this[0].arn : var.role_arn
   runtime       = var.dotnet_runtime
