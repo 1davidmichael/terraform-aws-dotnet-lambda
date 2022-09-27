@@ -24,7 +24,7 @@ resource "null_resource" "create_package" {
   }
 
   provisioner "local-exec" {
-    command = "${path.module}/bin/package.sh ${data.external.build_folder.result.location} ${var.code_location}"
+    command = "${path.module}/bin/package.sh ${data.external.build_folder.result.location} ${var.code_location} ${var.architecture}"
   }
 }
 
@@ -40,6 +40,7 @@ resource "aws_lambda_function" "this" {
   description   = var.description
   memory_size   = var.memory_size
   filename      = data.external.build_folder.result.location
+  architectures = [var.architecture]
 }
 
 resource "aws_cloudwatch_log_group" "example" {

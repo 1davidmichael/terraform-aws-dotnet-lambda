@@ -72,3 +72,13 @@ variable "create_function" {
   description = "Controls whether Lambda Function resource should be created"
   default     = true
 }
+
+variable "architecture" {
+  type        = string
+  description = "The architecture of the Lambda function. Valid values are x86_64 and arm64."
+  default     = "x86_64"
+  validation {
+    condition     = can(contains(["x86_64", "arm64"], var.architecture))
+    error_message = "The architecture must be one of supported by AWS Lambda."
+  }
+}

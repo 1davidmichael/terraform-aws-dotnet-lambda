@@ -38,6 +38,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_architecture"></a> [architecture](#input\_architecture) | The architecture of the Lambda function. Valid values are x86\_64 and arm64. | `string` | `"x86_64"` | no |
 | <a name="input_code_location"></a> [code\_location](#input\_code\_location) | The location of the dotnet code for the lambda function | `string` | `"src/"` | no |
 | <a name="input_create_function"></a> [create\_function](#input\_create\_function) | Controls whether Lambda Function resource should be created | `bool` | `true` | no |
 | <a name="input_create_role"></a> [create\_role](#input\_create\_role) | Whether to create a role for the Lambda function. | `bool` | `true` | no |
