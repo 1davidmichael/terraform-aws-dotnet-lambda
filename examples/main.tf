@@ -9,11 +9,13 @@ provider "aws" {
 }
 
 module "dotnet_lambda" {
-  source         = "../"
-  function_name  = "dotnet-lambda-${random_pet.this.id}"
-  handler        = "examples::examples.Function::FunctionHandler"
-  dotnet_runtime = "dotnet6"
-  code_location  = "src/examples"
+  source          = "../"
+  function_name   = "dotnet-lambda-${random_pet.this.id}"
+  handler         = "examples::examples.Function::FunctionHandler"
+  dotnet_runtime  = "dotnet6"
+  code_location   = "src/examples"
+  create_function = false
+  create_role     = false
 }
 
 output "lambda_function_arn" {

@@ -43,6 +43,7 @@ resource "aws_lambda_function" "this" {
 }
 
 resource "aws_cloudwatch_log_group" "example" {
+  count             = var.create_function ? 1 : 0
   name              = "/aws/lambda/${var.function_name}"
   retention_in_days = var.log_retention
 }
