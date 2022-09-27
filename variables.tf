@@ -66,3 +66,9 @@ variable "code_location" {
     error_message = "The handler value must be set."
   }
 }
+
+variable "create_function" {
+  type        = bool
+  description = "Controls whether Lambda Function resource should be created"
+  default     = true
+}

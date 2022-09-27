@@ -29,6 +29,7 @@ resource "null_resource" "create_package" {
 }
 
 resource "aws_lambda_function" "this" {
+  count = var.create_function ? 1 : 0
   depends_on = [
     null_resource.create_package
   ]
