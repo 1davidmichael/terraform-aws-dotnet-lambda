@@ -13,6 +13,7 @@ jobs:
       - name: Terraform Format
         run: terraform fmt -check
   example:
+    runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: examples
