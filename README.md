@@ -3,6 +3,9 @@
 _Terraform module to create a dotnet lambda function locally_
 
 This module utilizes the `dotnet` runtime CLI locally to package the lambda and automatically upload it to AWS.
+This module was created as an experiment to see if it was possible and gain a deeper understanding of terraform. It may not work and comes with no guarantees.
+
+<https://blog.dmichael.be/2022/09/28/Terraform-External-Data-Provider-and-local-exec-Provisioner/>
 
 **Currently this uses a bash script to package the lambda. It will not work unless under WSL on Windows.**
 
@@ -50,7 +53,7 @@ No modules.
 | <a name="input_handler"></a> [handler](#input\_handler) | Lambda Function entrypoint in your code | `string` | `""` | no |
 | <a name="input_log_retention"></a> [log\_retention](#input\_log\_retention) | The number of days you want to retain log events in the specified log group. | `number` | `30` | no |
 | <a name="input_memory_size"></a> [memory\_size](#input\_memory\_size) | The amount of memory, in MB, your Lambda Function can use at runtime. Defaults to 128 MB. The value must be a multiple of 64 MB. | `number` | `128` | no |
-| <a name="input_role_arn"></a> [role\_arn](#input\_role\_arn) | The ARN of the IAM role that Lambda assumes when it executes your function to access any other Amazon Web Services (AWS) resources. | `string` | `""` | no |
+| <a name="input_role_arn"></a> [role\_arn](#input\_role\_arn) | The ARN of the IAM role that Lambda assumes when it executes your function to access any other Amazon Web Services (AWS) resources.  | `string` | `""` | no |
 
 ## Outputs
 
