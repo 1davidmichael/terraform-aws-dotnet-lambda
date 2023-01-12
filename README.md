@@ -35,6 +35,7 @@ No modules.
 | [aws_cloudwatch_log_group.example](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_group) | resource |
 | [aws_iam_role.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
 | [aws_iam_role_policy_attachment.lambda_logs](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
+| [aws_kms_key.key](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/kms_key) | resource |
 | [aws_lambda_function.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_function) | resource |
 | [null_resource.create_package](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
 | [external_external.build_folder](https://registry.terraform.io/providers/hashicorp/external/latest/docs/data-sources/external) | data source |
@@ -46,6 +47,7 @@ No modules.
 | <a name="input_architecture"></a> [architecture](#input\_architecture) | The architecture of the Lambda function. Valid values are x86\_64 and arm64. | `string` | `"x86_64"` | no |
 | <a name="input_code_location"></a> [code\_location](#input\_code\_location) | The location of the dotnet code for the lambda function | `string` | `"src/"` | no |
 | <a name="input_create_function"></a> [create\_function](#input\_create\_function) | Controls whether Lambda Function resource should be created | `bool` | `true` | no |
+| <a name="input_create_key"></a> [create\_key](#input\_create\_key) | Whether to create a KMS key for the Lambda function. | `bool` | `false` | no |
 | <a name="input_create_role"></a> [create\_role](#input\_create\_role) | Whether to create a role for the Lambda function. | `bool` | `true` | no |
 | <a name="input_description"></a> [description](#input\_description) | Description of what your Lambda Function does | `string` | `""` | no |
 | <a name="input_dotnet_runtime"></a> [dotnet\_runtime](#input\_dotnet\_runtime) | Dotnet runtime version for lambda to use | `string` | `"dotnet6"` | no |
@@ -53,7 +55,8 @@ No modules.
 | <a name="input_handler"></a> [handler](#input\_handler) | Lambda Function entrypoint in your code | `string` | `""` | no |
 | <a name="input_log_retention"></a> [log\_retention](#input\_log\_retention) | The number of days you want to retain log events in the specified log group. | `number` | `30` | no |
 | <a name="input_memory_size"></a> [memory\_size](#input\_memory\_size) | The amount of memory, in MB, your Lambda Function can use at runtime. Defaults to 128 MB. The value must be a multiple of 64 MB. | `number` | `128` | no |
-| <a name="input_role_arn"></a> [role\_arn](#input\_role\_arn) | The ARN of the IAM role that Lambda assumes when it executes your function to access any other Amazon Web Services (AWS) resources.  | `string` | `""` | no |
+| <a name="input_role_arn"></a> [role\_arn](#input\_role\_arn) | The ARN of the IAM role that Lambda assumes when it executes your function to access any other Amazon Web Services (AWS) resources. | `string` | `""` | no |
+| <a name="input_tracing_mode"></a> [tracing\_mode](#input\_tracing\_mode) | The tracing mode of the Lambda function. Valid values are Active and PassThrough. | `string` | `"PassThrough"` | no |
 
 ## Outputs
 

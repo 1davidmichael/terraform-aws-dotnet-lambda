@@ -41,12 +41,21 @@ resource "aws_lambda_function" "this" {
   memory_size   = var.memory_size
   filename      = data.external.build_folder.result.location
   architectures = [var.architecture]
+  tracing_config {
+    mode = var.tracing_mode
+  }
+}
+
+resource "aws_kms_key" "key" {
+  count       = var.create_key ? 1 : 0
+  description = "KMS key for ${var.function_name}"
 }
 
 resource "aws_cloudwatch_log_group" "example" {
   count             = var.create_function ? 1 : 0
   name              = "/aws/lambda/${var.function_name}"
   retention_in_days = var.log_retention
+  kms_key_id        = var.create_key ? aws_kms_key.key[0].arn : null
 }
 
 resource "aws_iam_role" "this" {

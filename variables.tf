@@ -73,6 +73,22 @@ variable "create_function" {
   default     = true
 }
 
+variable "tracing_mode" {
+  type        = string
+  description = "The tracing mode of the Lambda function. Valid values are Active and PassThrough."
+  default     = "PassThrough"
+  validation {
+    condition     = can(contains(["Active", "PassThrough"], var.tracing_mode))
+    error_message = "The tracing_mode must be one of supported by AWS Lambda."
+  }
+}
+
+variable "create_key" {
+  type        = bool
+  description = "Whether to create a KMS key for the Lambda function."
+  default     = false
+}
+
 variable "architecture" {
   type        = string
   description = "The architecture of the Lambda function. Valid values are x86_64 and arm64."
