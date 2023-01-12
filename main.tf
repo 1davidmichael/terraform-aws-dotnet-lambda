@@ -47,8 +47,9 @@ resource "aws_lambda_function" "this" {
 }
 
 resource "aws_kms_key" "key" {
-  count       = var.create_key ? 1 : 0
-  description = "KMS key for ${var.function_name}"
+  count               = var.create_key ? 1 : 0
+  description         = "KMS key for ${var.function_name}"
+  enable_key_rotation = true
 }
 
 resource "aws_cloudwatch_log_group" "example" {
